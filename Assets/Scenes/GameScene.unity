@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 102223775}
   - component: {fileID: 102223779}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb34f9b21983155459ce381f35fe40e6, type: 2}
+  - {fileID: 2100000, guid: f266ba03e1218bf45b32f96554872ef8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 1649501074}
   - component: {fileID: 1649501079}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8accd5b2b4477cb428eb780cec60c161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1649501074}
+  rb: {fileID: 0}
   acceleration: 0.01
-  friction: 1
+  friction: 0.002
   velocity: {x: 0, y: 0}
