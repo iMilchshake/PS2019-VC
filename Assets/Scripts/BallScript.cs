@@ -10,7 +10,7 @@ public class BallScript : MonoBehaviour
     public float acceleration = 1;
     public float friction = 1;
     [Header("Debugging")]
-    public Vector2 velocity;
+    public Vector3 velocity;
 
     void Update()
     {
@@ -20,9 +20,11 @@ public class BallScript : MonoBehaviour
 
     void Movement()
     {
-        velocity += new Vector2(Input.GetAxis("Horizontal") * acceleration, Input.GetAxis("Vertical") * acceleration); //Add Acceleration to current Velocity
+        Vector3 input = new Vector3(Input.GetAxis("Horizontal") * acceleration, 0, Input.GetAxis("Vertical") * acceleration); //Get User Input
+        velocity = transform.InverseTransformDirection(rb.velocity); //In case rb.velocity changed due to collisions, apply changes to velocity aswell
+        velocity += input; //Add Acceleration to current Velocity
         velocity = Vector3.MoveTowards(velocity, Vector3.zero, friction); //Apply Friction
-        transform.localPosition += new Vector3(velocity.x,0,velocity.y) * Time.deltaTime; //Add Velocity to Position
+        rb.velocity = transform.TransformDirection(velocity);
     }
 
     void checkErrors()
