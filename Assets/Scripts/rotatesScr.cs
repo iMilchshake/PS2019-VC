@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class rotatesScr : MonoBehaviour
 {
-    public float mp;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float tiltMultiplier;
 
-    // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(Input.GetAxis("Vertical")* mp, 0, Input.GetAxis("Horizontal")* -mp);
+        transform.rotation = Quaternion.Euler(Input.GetAxis("Horizontal") * -tiltMultiplier, 0, Input.GetAxis("Vertical")* -tiltMultiplier); 
     }
 }

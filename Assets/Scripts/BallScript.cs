@@ -20,7 +20,7 @@ public class BallScript : MonoBehaviour
 
     void Movement()
     {
-        Vector3 input = new Vector3(Input.GetAxis("Horizontal") * acceleration, 0, Input.GetAxis("Vertical") * acceleration); //Get User Input
+        Vector3 input = new Vector3(Input.GetAxis("Vertical") * acceleration, 0, -Input.GetAxis("Horizontal") * acceleration); //Get User Input
         velocity = transform.InverseTransformDirection(rb.velocity); //In case rb.velocity changed due to collisions, apply changes to velocity aswell
         velocity += input; //Add Acceleration to current Velocity
         velocity = Vector3.MoveTowards(velocity, Vector3.zero, friction); //Apply Friction
