@@ -48,6 +48,7 @@ public class BallScript : MonoBehaviour
     void Respawn()
     {
         transform.position = respawnLocation.position; //reset position
+        rb.velocity = Vector3.zero; //reset velocity
         CheckpointScript tmp = GetComponent<CheckpointScript>();
         tmp.reachedCheckpoints.Clear(); //reset reached checkpoints
     }
