@@ -8,7 +8,7 @@ public class rotatesScr : MonoBehaviour
 
     void Update()
     { 
-        Vector3 input = new Vector3(Input.GetAxis("Horizontal") * -tiltMultiplier, 0, Input.GetAxis("Vertical") * -tiltMultiplier);
+        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal") * -tiltMultiplier, 0, Input.GetAxisRaw("Vertical") * -tiltMultiplier);
         transform.rotation = Quaternion.Euler(input); 
     }
 }

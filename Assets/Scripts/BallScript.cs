@@ -6,14 +6,18 @@ public class BallScript : MonoBehaviour
 {
     [Header("References")]
     public Rigidbody rb;
+    public Transform respawnLocation;
     [Header("Movement Settings")]
     public float acceleration = 1;
     public float friction = 1;
+    [Header("Hotkey Settings")]
+    public KeyCode respawnKey;
     [Header("Debugging")]
     public Vector3 velocity;
 
     void Update()
     {
+        KeyInputs();
         Movement();
         checkErrors();
     }
@@ -31,5 +35,13 @@ public class BallScript : MonoBehaviour
     {
         if (friction >= acceleration)
             Debug.LogError("Acceleration ("+ acceleration + ") should be larger than friction ("+ friction + ") !");
+    }
+
+    void KeyInputs()
+    {
+        if(Input.GetKeyDown(respawnKey))
+        {
+            transform.position = respawnLocation.position;
+        }
     }
 }
