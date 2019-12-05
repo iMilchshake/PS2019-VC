@@ -41,7 +41,14 @@ public class BallScript : MonoBehaviour
     {
         if(Input.GetKeyDown(respawnKey))
         {
-            transform.position = respawnLocation.position;
+            Respawn();
         }
+    }
+
+    void Respawn()
+    {
+        transform.position = respawnLocation.position; //reset position
+        CheckpointScript tmp = GetComponent<CheckpointScript>();
+        tmp.reachedCheckpoints.Clear(); //reset reached checkpoints
     }
 }

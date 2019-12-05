@@ -6,7 +6,7 @@ using UnityEngine;
 public class CheckpointScript : MonoBehaviour
 {
 
-    Stack<int> reachedCheckpoints;
+    public Stack<int> reachedCheckpoints;
     AudioSource audioData;
 
     void Start()
