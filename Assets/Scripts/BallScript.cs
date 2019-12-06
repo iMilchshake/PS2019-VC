@@ -20,6 +20,11 @@ public class BallScript : MonoBehaviour
         KeyInputs();
         Movement();
         checkErrors();
+
+        if(transform.position.y < -10f)
+        {
+            Respawn();
+        }
     }
 
     void Movement()

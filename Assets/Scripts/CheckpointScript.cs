@@ -27,7 +27,7 @@ public class CheckpointScript : MonoBehaviour
         int checkpointNumber = -1;
         int.TryParse(other.gameObject.name, out checkpointNumber);
 
-        if(checkpointNumber != -1)
+        if(checkpointNumber != -1) //hit a checkpoint
         {
             if(reachedCheckpoints.Count==0) //first checkpoint
             {
