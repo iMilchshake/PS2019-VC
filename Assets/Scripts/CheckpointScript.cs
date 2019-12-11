@@ -7,17 +7,40 @@ public class CheckpointScript : MonoBehaviour
 {
 
     public Stack<int> reachedCheckpoints;
+    public GameObject nextCheckpoint; 
     AudioSource audioData;
 
     void Start()
     {
         reachedCheckpoints = new Stack<int>();
         audioData = GetComponent<AudioSource>();
+        nextCheckpoint = findNextCheckpoint();
     }
 
     void Update()
     {
         
+    }
+
+    private GameObject findNextCheckpoint()
+    {
+        GameObject next;
+        if (reachedCheckpoints.Count == 0)
+        {
+            next = GameObject.Find("1"); //First!
+        }
+        else
+        {
+            try
+            {
+                next = GameObject.Find((reachedCheckpoints.Peek() + 1).ToString()); //Find next checkpoint
+            } catch(System.Exception e)
+            {
+                next = null;
+            }
+        }
+
+        return next;     
     }
 
     private void OnTriggerStay(Collider other)
@@ -36,7 +59,7 @@ public class CheckpointScript : MonoBehaviour
             }
             else 
             {
-                if(reachedCheckpoints.Peek() < checkpointNumber) //a larger checkpoint was hit
+                if(reachedCheckpoints.Peek()+1 == checkpointNumber) //the next checkpoint was hit
                 {
                     reachedCheckpoints.Push(checkpointNumber);
                     newCheckpointAdded = true;
@@ -48,6 +71,7 @@ public class CheckpointScript : MonoBehaviour
                 audioData.pitch = ((float)checkpointNumber / 36) + 1;
                 audioData.Play(0);
                 Debug.Log(checkpointNumber);
+                nextCheckpoint = findNextCheckpoint();
             }
         }
 
