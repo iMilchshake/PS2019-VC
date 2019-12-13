@@ -9,9 +9,11 @@ public class BallScript : MonoBehaviour
     public Rigidbody rb;
     public Transform respawnLocation;
     public Text debugText;
+    public GameObject light;
     [Header("Movement Settings")]
     public float desktopAcceleration = 1;
     public float mobileAcceleration = 1;
+    public float lightTurnMultiplier = 1;
     public float friction = 1;
     [Header("Hotkey Settings")]
     public KeyCode respawnKey;
@@ -19,26 +21,39 @@ public class BallScript : MonoBehaviour
     public Vector3 velocity;
     public Gyroscope myGyro;
     public Vector3 input;
+    public Quaternion defaultLightRotation;
 
     void Start()
     {
         myGyro = Input.gyro;
         myGyro.enabled = true; //enable Gyro
+        defaultLightRotation = light.transform.rotation;
     }
 
     void Update()
     {
         UserInputs();
-        Movement();
-        checkErrors();
-
-
-        debugText.text = "" + input;
+        NewMovement();
+        //checkErrors();
+        //Light();
 
         if (transform.position.y < -10f)
         {
             Respawn();
         }
+    }
+
+    void Light()
+    {
+        Vector3 rotated_input = new Vector3(-input.z, 0, input.x);
+        light.transform.rotation = defaultLightRotation;
+        light.transform.Rotate((light.transform.InverseTransformDirection(rotated_input) / mobileAcceleration) * lightTurnMultiplier);
+
+    }
+
+    void NewMovement()
+    {
+        rb.velocity += input;
     }
 
     void Movement()
