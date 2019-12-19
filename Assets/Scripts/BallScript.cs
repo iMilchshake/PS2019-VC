@@ -9,7 +9,7 @@ public class BallScript : MonoBehaviour
     public Rigidbody rb;
     public Transform respawnLocation;
     public Text debugText;
-    public GameObject light;
+    public GameObject lightMain;
     [Header("Movement Settings")]
     public float desktopAcceleration = 1;
     public float mobileAcceleration = 1;
@@ -25,9 +25,11 @@ public class BallScript : MonoBehaviour
 
     void Start()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 120;
         myGyro = Input.gyro;
         myGyro.enabled = true; //enable Gyro
-        defaultLightRotation = light.transform.rotation;
+        defaultLightRotation = lightMain.transform.rotation;
     }
 
     void Update()
@@ -36,6 +38,9 @@ public class BallScript : MonoBehaviour
         NewMovement();
         //checkErrors();
         //Light();
+
+        if(Time.frameCount%10 == 0)
+            debugText.text = (1 / Time.deltaTime).ToString("0.00");
 
         if (transform.position.y < -10f)
         {
@@ -46,14 +51,13 @@ public class BallScript : MonoBehaviour
     void Light()
     {
         Vector3 rotated_input = new Vector3(-input.z, 0, input.x);
-        light.transform.rotation = defaultLightRotation;
-        light.transform.Rotate((light.transform.InverseTransformDirection(rotated_input) / mobileAcceleration) * lightTurnMultiplier);
-
+        lightMain.transform.rotation = defaultLightRotation;
+        lightMain.transform.Rotate((lightMain.transform.InverseTransformDirection(rotated_input) / mobileAcceleration) * lightTurnMultiplier);
     }
 
     void NewMovement()
     {
-        rb.velocity += input;
+        rb.AddForce(input,ForceMode.VelocityChange);
     }
 
     void Movement()
@@ -93,6 +97,7 @@ public class BallScript : MonoBehaviour
     {
         transform.position = respawnLocation.position; //reset position
         rb.velocity = Vector3.zero; //reset velocity
+
         CheckpointScript tmp = GetComponent<CheckpointScript>();
         tmp.reachedCheckpoints.Clear(); //reset reached checkpoints
     }
