@@ -43,8 +43,8 @@ public class BallScript : MonoBehaviour
         //checkErrors();
         //Light();
 
-        if (Time.frameCount%10 == 0)
-            debugText.text = (1 / Time.deltaTime).ToString("0.00");
+        if (Time.frameCount % 10 == 0)
+            debugText.text = (1 / Time.deltaTime).ToString("0.00") + "\n" + timeSinceRespawn.ToString("0.0");
 
         if (transform.position.y < -10f)
         {
@@ -102,9 +102,13 @@ public class BallScript : MonoBehaviour
         transform.position = respawnLocation.position; //reset position
         rb.velocity = Vector3.zero; //reset velocity
 
-        CheckpointScript tmp = GetComponent<CheckpointScript>();
-        tmp.reachedCheckpoints.Clear(); //reset reached checkpoints
+        CheckpointScript checkPscr = GetComponent<CheckpointScript>();
+        checkPscr.reachedCheckpoints.Clear(); //reset reached checkpoints
+        checkPscr.nextCheckpoint = checkPscr.findNextCheckpoint();
+        checkPscr.CheckpointCursor.transform.position = checkPscr.nextCheckpoint.transform.position; //reset cursor
         timeSinceRespawn = 0f; //reset Timer
+
+        
     }
 
     private static Quaternion GyroToUnity(Quaternion q)

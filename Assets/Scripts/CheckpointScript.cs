@@ -7,7 +7,8 @@ public class CheckpointScript : MonoBehaviour
 {
 
     public Stack<int> reachedCheckpoints;
-    public GameObject nextCheckpoint; 
+    public GameObject nextCheckpoint;
+    public GameObject CheckpointCursor;
     AudioSource audioData;
 
     void Start()
@@ -15,6 +16,7 @@ public class CheckpointScript : MonoBehaviour
         reachedCheckpoints = new Stack<int>();
         audioData = GetComponent<AudioSource>();
         nextCheckpoint = findNextCheckpoint();
+        CheckpointCursor.transform.position = nextCheckpoint.transform.position;
     }
 
     void Update()
@@ -22,7 +24,7 @@ public class CheckpointScript : MonoBehaviour
         
     }
 
-    private GameObject findNextCheckpoint()
+    public GameObject findNextCheckpoint()
     {
         GameObject next;
         if (reachedCheckpoints.Count == 0)
@@ -72,6 +74,8 @@ public class CheckpointScript : MonoBehaviour
                 audioData.Play(0);
                 Debug.Log(checkpointNumber);
                 nextCheckpoint = findNextCheckpoint();
+                if(nextCheckpoint!=null)
+                    CheckpointCursor.transform.position = nextCheckpoint.transform.position;
             }
         }
 
