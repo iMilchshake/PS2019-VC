@@ -15,8 +15,8 @@ public class CheckpointScript : MonoBehaviour
     {
         reachedCheckpoints = new Stack<int>();
         audioData = GetComponent<AudioSource>();
-        nextCheckpoint = findNextCheckpoint();
-        CheckpointCursor.transform.position = nextCheckpoint.transform.position;
+        //nextCheckpoint = findNextCheckpoint();
+        //CheckpointCursor.transform.position = nextCheckpoint.transform.position;
     }
 
     void Update()
@@ -70,12 +70,13 @@ public class CheckpointScript : MonoBehaviour
 
             if(newCheckpointAdded) 
             {
-                audioData.pitch = ((float)checkpointNumber / 36) + 1;
+                audioData.pitch = ((float)checkpointNumber / 40) + 1;
                 audioData.Play(0);
                 Debug.Log(checkpointNumber);
-                nextCheckpoint = findNextCheckpoint();
-                if(nextCheckpoint!=null)
-                    CheckpointCursor.transform.position = nextCheckpoint.transform.position;
+                
+                //nextCheckpoint = findNextCheckpoint();
+                //if(nextCheckpoint!=null)
+                    //CheckpointCursor.transform.position = nextCheckpoint.transform.position;
             }
         }
 

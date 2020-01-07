@@ -104,8 +104,8 @@ public class BallScript : MonoBehaviour
 
         CheckpointScript checkPscr = GetComponent<CheckpointScript>();
         checkPscr.reachedCheckpoints.Clear(); //reset reached checkpoints
-        checkPscr.nextCheckpoint = checkPscr.findNextCheckpoint();
-        checkPscr.CheckpointCursor.transform.position = checkPscr.nextCheckpoint.transform.position; //reset cursor
+        //checkPscr.nextCheckpoint = checkPscr.findNextCheckpoint();
+        //checkPscr.CheckpointCursor.transform.position = checkPscr.nextCheckpoint.transform.position; //reset cursor
         timeSinceRespawn = 0f; //reset Timer
 
         
