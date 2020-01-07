@@ -74,9 +74,11 @@ public class CheckpointScript : MonoBehaviour
                 audioData.Play(0);
                 Debug.Log(checkpointNumber);
                 
-                //nextCheckpoint = findNextCheckpoint();
-                //if(nextCheckpoint!=null)
-                    //CheckpointCursor.transform.position = nextCheckpoint.transform.position;
+                if(reachedCheckpoints.Peek() == 36) //finish
+                {
+                    BallScript ballScr = GetComponent<BallScript>();
+                    ballScr.EnableFinishScreen();
+                }
             }
         }
 

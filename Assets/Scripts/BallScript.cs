@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class BallScript : MonoBehaviour
@@ -10,6 +11,8 @@ public class BallScript : MonoBehaviour
     public Transform respawnLocation;
     public Text debugText;
     public GameObject lightMain;
+    public GameObject FinishScreen;
+    public Text FinishText;
     [Header("Movement Settings")]
     public float desktopAcceleration = 1;
     public float mobileAcceleration = 1;
@@ -17,6 +20,7 @@ public class BallScript : MonoBehaviour
     public float friction = 1;
     [Header("Hotkey Settings")]
     public KeyCode respawnKey;
+    public KeyCode abortKey;
     [Header("Debugging")]
     public Vector3 velocity;
     public Gyroscope myGyro;
@@ -24,6 +28,23 @@ public class BallScript : MonoBehaviour
     public Quaternion defaultLightRotation;
     public float timeSinceRespawn;
     public float timeSinceStart;
+    public float maxReachedCheckpoints;
+    public int respawns;
+
+    public void EnableFinishScreen()
+    {
+        CheckpointScript checkPscr = GetComponent<CheckpointScript>();
+
+        FinishScreen.SetActive(true);
+        FinishText.text =
+            "Time to goal: " + timeSinceRespawn.ToString("0.00") + " Seconds\n" +
+            "Overall Playtime: " + timeSinceStart.ToString("0.00") + " Seconds\n" +
+            "Reached Checkpoints: " + Mathf.Max(maxReachedCheckpoints, checkPscr.reachedCheckpoints.Count) + "/" + "36 \n" +
+            "Respawns: " + respawns;
+
+        mobileAcceleration = 0;
+        desktopAcceleration = 0;
+    }
 
     void Start()
     {
@@ -95,6 +116,11 @@ public class BallScript : MonoBehaviour
         {
             Respawn();
         }
+
+        if(Input.GetKeyDown(abortKey))
+        {
+            EnableFinishScreen();
+        }
     }
 
     void Respawn()
@@ -103,12 +129,14 @@ public class BallScript : MonoBehaviour
         rb.velocity = Vector3.zero; //reset velocity
 
         CheckpointScript checkPscr = GetComponent<CheckpointScript>();
+
+        maxReachedCheckpoints = Mathf.Max(maxReachedCheckpoints, checkPscr.reachedCheckpoints.Count);
         checkPscr.reachedCheckpoints.Clear(); //reset reached checkpoints
         //checkPscr.nextCheckpoint = checkPscr.findNextCheckpoint();
         //checkPscr.CheckpointCursor.transform.position = checkPscr.nextCheckpoint.transform.position; //reset cursor
         timeSinceRespawn = 0f; //reset Timer
+        respawns += 1;
 
-        
     }
 
     private static Quaternion GyroToUnity(Quaternion q)
