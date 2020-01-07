@@ -22,6 +22,8 @@ public class BallScript : MonoBehaviour
     public Gyroscope myGyro;
     public Vector3 input;
     public Quaternion defaultLightRotation;
+    public float timeSinceRespawn;
+    public float timeSinceStart;
 
     void Start()
     {
@@ -36,10 +38,12 @@ public class BallScript : MonoBehaviour
     {
         UserInputs();
         NewMovement();
+        timeSinceRespawn += Time.deltaTime;
+        timeSinceStart += Time.deltaTime;
         //checkErrors();
         //Light();
 
-        if(Time.frameCount%10 == 0)
+        if (Time.frameCount%10 == 0)
             debugText.text = (1 / Time.deltaTime).ToString("0.00");
 
         if (transform.position.y < -10f)
@@ -100,6 +104,7 @@ public class BallScript : MonoBehaviour
 
         CheckpointScript tmp = GetComponent<CheckpointScript>();
         tmp.reachedCheckpoints.Clear(); //reset reached checkpoints
+        timeSinceRespawn = 0f; //reset Timer
     }
 
     private static Quaternion GyroToUnity(Quaternion q)
