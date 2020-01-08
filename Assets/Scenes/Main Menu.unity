@@ -1617,8 +1617,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 698.47, y: 349.25}
+  m_AnchoredPosition: {x: 0, y: -35}
+  m_SizeDelta: {x: 734.54, y: 425.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1387573745
 MonoBehaviour:
@@ -1640,10 +1640,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1efe930d6795b4f5f85e48dce01cdf4a, type: 3}
-    m_FontSize: 44
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 230
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -1655,7 +1655,12 @@ MonoBehaviour:
     as fast as possible.
 
 
-    No corner-cutting! You need to stay on the black line to get points!'
+    No corner-cutting! You need to stay on the black line to get points!
+
+
+    If you get stuck press the ''Respawn'' Button.
+
+    If you dont manage to finish the level you can press the ''Abort'' Button.'
 --- !u!222 &1387573746
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class BallScript : MonoBehaviour
 
         FinishScreen.SetActive(true);
         FinishText.text =
-            "Time to goal: " + timeSinceRespawn.ToString("0.00") + " seconds\n" +
+            "Time to complete level: " + timeSinceRespawn.ToString("0.00") + " seconds\n" +
             "Overall playtime: " + timeSinceStart.ToString("0.00") + " seconds\n" +
             "Reached checkpoints: " + Mathf.Max(maxReachedCheckpoints, checkPscr.reachedCheckpoints.Count) + "/" + "36 \n" +
             "Respawns: " + respawns + "\n" +
@@ -125,7 +125,7 @@ public class BallScript : MonoBehaviour
         }
     }
 
-    void Respawn()
+    public void Respawn()
     {
         transform.position = respawnLocation.position; //reset position
         rb.velocity = Vector3.zero; //reset velocity
