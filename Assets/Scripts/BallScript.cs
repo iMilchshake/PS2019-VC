@@ -37,10 +37,12 @@ public class BallScript : MonoBehaviour
 
         FinishScreen.SetActive(true);
         FinishText.text =
-            "Time to goal: " + timeSinceRespawn.ToString("0.00") + " Seconds\n" +
-            "Overall Playtime: " + timeSinceStart.ToString("0.00") + " Seconds\n" +
-            "Reached Checkpoints: " + Mathf.Max(maxReachedCheckpoints, checkPscr.reachedCheckpoints.Count) + "/" + "36 \n" +
-            "Respawns: " + respawns;
+            "Time to goal: " + timeSinceRespawn.ToString("0.00") + " seconds\n" +
+            "Overall playtime: " + timeSinceStart.ToString("0.00") + " seconds\n" +
+            "Reached checkpoints: " + Mathf.Max(maxReachedCheckpoints, checkPscr.reachedCheckpoints.Count) + "/" + "36 \n" +
+            "Respawns: " + respawns + "\n" +
+            "\n" +
+            "Thank you for playing!";
 
         mobileAcceleration = 0;
         desktopAcceleration = 0;
