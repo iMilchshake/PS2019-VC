@@ -13,6 +13,7 @@ public class BallScript : MonoBehaviour
     public GameObject lightMain;
     public GameObject FinishScreen;
     public Text FinishText;
+    public CheckpointScript checkPscr;
     [Header("Movement Settings")]
     public float desktopAcceleration = 1;
     public float mobileAcceleration = 1;
@@ -55,6 +56,7 @@ public class BallScript : MonoBehaviour
         myGyro = Input.gyro;
         myGyro.enabled = true; //enable Gyro
         defaultLightRotation = lightMain.transform.rotation;
+        checkPscr = GetComponent<CheckpointScript>(); //get reference to the checkpointScript
     }
 
     void Update()
@@ -127,18 +129,12 @@ public class BallScript : MonoBehaviour
 
     public void Respawn()
     {
-        transform.position = respawnLocation.position; //reset position
-        rb.velocity = Vector3.zero; //reset velocity
-
-        CheckpointScript checkPscr = GetComponent<CheckpointScript>();
-
-        maxReachedCheckpoints = Mathf.Max(maxReachedCheckpoints, checkPscr.reachedCheckpoints.Count);
+        transform.position = respawnLocation.position; //reset ball position
+        rb.velocity = Vector3.zero; //reset ball velocity
+        maxReachedCheckpoints = Mathf.Max(maxReachedCheckpoints, checkPscr.reachedCheckpoints.Count); //update maximum reached checkpoints
         checkPscr.reachedCheckpoints.Clear(); //reset reached checkpoints
-        //checkPscr.nextCheckpoint = checkPscr.findNextCheckpoint();
-        //checkPscr.CheckpointCursor.transform.position = checkPscr.nextCheckpoint.transform.position; //reset cursor
         timeSinceRespawn = 0f; //reset Timer
         respawns += 1;
-
     }
 
     private static Quaternion GyroToUnity(Quaternion q)
